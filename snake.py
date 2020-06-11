@@ -16,7 +16,10 @@ screen.fill((141,141,141))
 def end_game():
     pygame.quit()
     sys.exit()
-    
+
+def banner():
+    screen.blit(banner_Font.render("Score: ", False, white),(0,0))
+
 while True:
   
     for action in pygame.event.get():
@@ -24,4 +27,5 @@ while True:
             
             print("break")
             end_game()
+        banner()
     pygame.display.update()
