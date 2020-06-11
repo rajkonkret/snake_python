@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 white = (255,255,255)
+red = (255,0,0)
 black = (0,0,0)
 map_size = 900
 pygame.init()
@@ -20,6 +21,9 @@ def end_game():
 def banner():
     screen.blit(banner_Font.render("Score: ", False, white),(0,0))
 
+def show_snake():
+    screen.blit(banner_Font.render("O", False, red),(400,400))
+
 while True:
   
     for action in pygame.event.get():
@@ -28,4 +32,5 @@ while True:
             print("break")
             end_game()
         banner()
+        show_snake()
     pygame.display.update()
