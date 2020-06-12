@@ -5,7 +5,8 @@ white = (255,255,255)
 red = (255,0,0)
 black = (0,0,0)
 map_size = 900
-x = 0
+x,y = 0,0
+dx, dy =0,0
 pygame.init()
 screen = pygame.display.set_mode((map_size, map_size*3//4))
 pygame.display.set_caption("Snake")
@@ -36,13 +37,29 @@ while True:
             end_game()
         if action.type is pygame.KEYDOWN:
             if action.key is pygame.K_q:
-                x=x-1
+                x=-1
+                y=0
                 print(x)
+            if action.key is pygame.K_w:
+                x=+1
+                y=0
+                print(x)
+            if action.key is pygame.K_p:
+                y=-1
+                x=0
+                print(y)
+            if action.key is pygame.K_l:
+                y=+1
+                x=0
+                print(y)
         #keys = pygame.key.get_pressed()
        
                  
 
-        banner()
-        screen.fill((141,141,141))
-        show_snake(400+x,400)
+    banner()
+    screen.fill((141,141,141))
+    dx +=x
+    dy +=y
+    show_snake(400+dx,400+dy)
+    print("S")
     pygame.display.update()
