@@ -17,6 +17,19 @@ pygame.font.init()
 screen.fill((141,141,141))
 print(pygame.key.get_repeat())
 pygame.key.set_repeat(1,1)
+snake_all = []
+class Snake_element:
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+snake_el = Snake_element(400,400)
+snake_el_2 = Snake_element(400,465)
+
+
+print(snake_el.x)
+snake_all.append(snake_el)
+snake_all.append(snake_el_2)
+print(snake_all[0])
 
 def end_game():
     pygame.quit()
@@ -25,8 +38,9 @@ def end_game():
 def banner():
     screen.blit(banner_Font.render("Score: ", False, white),(0,0))
 
-def show_snake(x,y):
-    screen.blit(banner_Font.render("O", False, red),(x,y))
+def show_snake(snake,dx,dy):
+    for i in snake:
+       screen.blit(banner_Font.render("O", False, red),(i.x + dx, i.y + dy))
 
 while True:
   
@@ -55,11 +69,10 @@ while True:
         #keys = pygame.key.get_pressed()
        
                  
-
-    banner()
     screen.fill((141,141,141))
+    banner()
+    
     dx +=x
     dy +=y
-    show_snake(400+dx,400+dy)
-    print("S")
+    show_snake(snake_all,dx,dy)
     pygame.display.update()
