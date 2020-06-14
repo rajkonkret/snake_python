@@ -1,6 +1,8 @@
 import pygame
 import sys
 import random
+import time
+
 white = (255,255,255)
 red = (255,0,0)
 black = (0,0,0)
@@ -13,6 +15,7 @@ pygame.display.set_caption("Snake")
 #screen.blit(circle_surface, 0)
 main_Font = pygame.font.SysFont('Calibri', 170)
 banner_Font = pygame.font.SysFont('Calibri', 100)
+snake_Font = pygame.font.SysFont('Calibri', 50)
 pygame.font.init()
 screen.fill((141,141,141))
 print(pygame.key.get_repeat())
@@ -23,17 +26,19 @@ class Snake_element:
         self.number = number
         self.x = x
         self.y = y
-snake_el = Snake_element(1,400,400)
-snake_el_2 = Snake_element(2,400,465)
-snake_el_3 = Snake_element(3,
-400,530)
+
+for i in range(1,20):
+    snake_el = Snake_element(i,400,350+i*35)
+    snake_all.append(snake_el)
 
 
 
-print(snake_el.x)
-snake_all.append(snake_el)
-snake_all.append(snake_el_2)
-snake_all.append(snake_el_3)
+
+
+#print(snake_el.x)
+#snake_all.append(snake_el)
+#snake_all.append(snake_el_2)
+#snake_all.append(snake_el_3)
 print(snake_all[0])
 
 def end_game():
@@ -45,7 +50,7 @@ def banner():
 
 def show_snake(snake,dx,dy):
     for i in snake:
-       screen.blit(banner_Font.render(str(i.number), False, red),(i.x , i.y ))
+       screen.blit(snake_Font.render('O', False, red),(i.x , i.y ))
        print(i,  i.x, " ", i.y)
     first_el_x = snake[0].x
     first_el_y = snake[0].y
@@ -57,8 +62,8 @@ def show_snake(snake,dx,dy):
        
         
 
-    first_el_y += dy*65
-    first_el_x += dx*60
+    first_el_y += dy*30
+    first_el_x += dx*25
     snake[0].x = first_el_x
     snake[0].y = first_el_y
     print("len snake: ", len(snake))
@@ -91,10 +96,11 @@ while True:
         #keys = pygame.key.get_pressed()
        
                  
-            screen.fill((141,141,141))
-            banner()
+    screen.fill((141,141,141))
+    banner()
     
-            dx +=x
-            dy +=y
-            show_snake(snake_all,x,y)
+    dx +=x
+    dy +=y
+    show_snake(snake_all,x,y)
+    time.sleep(1/5)
     pygame.display.update()
