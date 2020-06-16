@@ -15,7 +15,7 @@ pygame.display.set_caption("Snake")
 #screen.blit(circle_surface, 0)
 snake_font_size =30
 main_Font = pygame.font.SysFont('Calibri', 170)
-banner_Font = pygame.font.SysFont('Calibri', 100)
+banner_Font = pygame.font.SysFont('Calibri', 70)
 snake_Font = pygame.font.SysFont('Calibri', snake_font_size)
 pygame.font.init()
 screen.fill((141,141,141))
