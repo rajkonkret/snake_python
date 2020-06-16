@@ -28,7 +28,7 @@ class Snake_element:
         self.x = x
         self.y = y
 
-for i in range(1,20):
+for i in range(1,2):
     snake_el = Snake_element(i,400,350+i*snake_font_size*0.7)
     snake_all.append(snake_el)
 
@@ -72,7 +72,7 @@ def show_snake(snake,dx,dy):
 show_snake(snake_all,0,0)
 def snake_growth(d_x):
     if d_x != 0 and d_x % 4 == 0 :
-        snake_all.append(Snake_element(i,400,350+i*35))
+        snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7,snake_all[-1].y + snake_font_size*0.7 ))
         print(d_x)
         print("len snake: ", len(snake_all))
         
