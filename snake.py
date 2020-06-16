@@ -13,9 +13,10 @@ pygame.init()
 screen = pygame.display.set_mode((map_size, map_size*3//4))
 pygame.display.set_caption("Snake")
 #screen.blit(circle_surface, 0)
+snake_font_size =30
 main_Font = pygame.font.SysFont('Calibri', 170)
 banner_Font = pygame.font.SysFont('Calibri', 100)
-snake_Font = pygame.font.SysFont('Calibri', 50)
+snake_Font = pygame.font.SysFont('Calibri', snake_font_size)
 pygame.font.init()
 screen.fill((141,141,141))
 print(pygame.key.get_repeat())
@@ -28,7 +29,7 @@ class Snake_element:
         self.y = y
 
 for i in range(1,20):
-    snake_el = Snake_element(i,400,350+i*35)
+    snake_el = Snake_element(i,400,350+i*snake_font_size*0.7)
     snake_all.append(snake_el)
 
 
@@ -62,8 +63,8 @@ def show_snake(snake,dx,dy):
        
         
 
-    first_el_y += dy*30
-    first_el_x += dx*25
+    first_el_y += dy*snake_font_size*0.6
+    first_el_x += dx*snake_font_size/2
     snake[0].x = first_el_x
     snake[0].y = first_el_y
    # print("len snake: ", len(snake))
