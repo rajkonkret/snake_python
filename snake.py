@@ -51,12 +51,12 @@ def banner():
 def show_snake(snake,dx,dy):
     for i in snake:
        screen.blit(snake_Font.render('O', False, red),(i.x , i.y ))
-       print(i,  i.x, " ", i.y)
+      # print(i,  i.x, " ", i.y)
     first_el_x = snake[0].x
     first_el_y = snake[0].y
 
     for i in range(len(snake)-2,-1, -1):
-        print("i", i)
+       # print("i", i)
         snake[i+1].x = snake[i].x
         snake[i+1].y = snake[i].y
        
@@ -66,9 +66,15 @@ def show_snake(snake,dx,dy):
     first_el_x += dx*25
     snake[0].x = first_el_x
     snake[0].y = first_el_y
-    print("len snake: ", len(snake))
+   # print("len snake: ", len(snake))
     
 show_snake(snake_all,0,0)
+def snake_growth(d_x):
+    if d_x != 0 and d_x % 4 == 0 :
+        snake_all.append(Snake_element(i,400,350+i*35))
+        print(d_x)
+        print("len snake: ", len(snake_all))
+        
 while True:
   
     for action in pygame.event.get():
@@ -80,19 +86,19 @@ while True:
             if action.key is pygame.K_q:
                 x=-1
                 y=0
-                print(x)
+               # print(x)
             if action.key is pygame.K_w:
                 x=+1
                 y=0
-                print(x)
+               # print(x)
             if action.key is pygame.K_p:
                 y=-1
                 x=0
-                print(y)
+               # print(y)
             if action.key is pygame.K_l:
                 y=+1
                 x=0
-                print(y)
+              #  print(y)
         #keys = pygame.key.get_pressed()
        
                  
@@ -102,5 +108,7 @@ while True:
     dx +=x
     dy +=y
     show_snake(snake_all,x,y)
-    time.sleep(1/5)
+    #print(dx)
+    snake_growth(dx)
+    time.sleep(1/8)
     pygame.display.update()
