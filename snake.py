@@ -70,9 +70,13 @@ def show_snake(snake,dx,dy):
    # print("len snake: ", len(snake))
     
 show_snake(snake_all,0,0)
-def snake_growth(d_x):
+def snake_growth(d_x, x, y):
+    if len(snake_all) >1 :
+        x_sign = (snake_all[-1].x - snake_all[-2].x)/abs(snake_all[-1].x - snake_all[-2].x)
+    else:
+        x_sign = -1
     if d_x != 0 and d_x % 4 == 0 :
-        snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7,snake_all[-1].y + snake_font_size*0.7 ))
+        snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7 * x_sign ,snake_all[-1].y + snake_font_size*0.7 * y ))
         print(d_x)
         print("len snake: ", len(snake_all))
         
@@ -110,6 +114,6 @@ while True:
     dy +=y
     show_snake(snake_all,x,y)
     #print(dx)
-    snake_growth(dx)
+    snake_growth(dx,x,y)
     time.sleep(1/8)
     pygame.display.update()
