@@ -70,13 +70,20 @@ def show_snake(snake,dx,dy):
    # print("len snake: ", len(snake))
     
 show_snake(snake_all,0,0)
+
 def snake_growth(d_x, x, y):
-    if len(snake_all) >1 :
+    if len(snake_all) > 1 and (snake_all[-1].x - snake_all[-2].x) != 0:
         x_sign = (snake_all[-1].x - snake_all[-2].x)/abs(snake_all[-1].x - snake_all[-2].x)
     else:
         x_sign = -1
+
+    if len(snake_all) > 1 and (snake_all[-1].y - snake_all[-2].y) != 0:
+        y_sign = (snake_all[-1].y - snake_all[-2].y)/abs(snake_all[-1].y - snake_all[-2].y)
+    else:
+        y_sign = -1
+
     if d_x != 0 and d_x % 4 == 0 :
-        snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7 * x_sign ,snake_all[-1].y + snake_font_size*0.7 * y ))
+        snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7 * x_sign ,snake_all[-1].y + snake_font_size*0.7 * y_sign))
         print(d_x)
         print("len snake: ", len(snake_all))
         
