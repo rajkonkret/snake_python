@@ -103,9 +103,15 @@ def add_apple():
     apple_all.append(Apple_element(apple_x, apple_y))
 
 def show_apple():
+   
     for apple in apple_all:
         screen.blit(snake_Font.render('X', False, blue),(apple.x * 21, apple.y * 21))
 
+def detect_colision():
+    
+    for apple in apple_all:
+        if apple.x in range(int(snake_all[0].x), int(snake_all[0].x + 21)):
+            print("collision")
 
 while True:
   
@@ -144,6 +150,7 @@ while True:
         add_apple()
     #print(dx)
     show_apple()
+    detect_colision()
     snake_growth(dx,x,y)
    
     time.sleep(1/8)
