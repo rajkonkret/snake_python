@@ -5,6 +5,7 @@ import time
 
 white = (255,255,255)
 red = (255,0,0)
+blue = (0,0,255)
 black = (0,0,0)
 map_size = 900
 x,y = 0,0
@@ -87,6 +88,12 @@ def snake_growth(d_x, x, y):
         print(d_x)
         print("len snake: ", len(snake_all))
         
+def show_apple():
+    apple_x = random.randint(0,20)
+    apple_y = random.randint(0,20)
+    screen.blit(snake_Font.render('X', False, blue),(apple_x * 20, apple_y * 20))
+
+
 while True:
   
     for action in pygame.event.get():
@@ -120,7 +127,9 @@ while True:
     dx +=x
     dy +=y
     show_snake(snake_all,x,y)
+    show_apple()
     #print(dx)
     snake_growth(dx,x,y)
+   
     time.sleep(1/8)
     pygame.display.update()
