@@ -10,7 +10,7 @@ black = (0,0,0)
 map_size = 900
 x,y = 0,0
 dx, dy =0,0
-
+score = 0
 pygame.init()
 screen = pygame.display.set_mode((map_size, map_size*3//4))
 pygame.display.set_caption("Snake")
@@ -56,8 +56,8 @@ def end_game():
     pygame.quit()
     sys.exit()
 
-def banner():
-    screen.blit(banner_Font.render("Score: ", False, white),(0,0))
+def banner(score):
+    screen.blit(banner_Font.render("Score: " + str(score), False, white),(0,0))
 
 def show_snake(snake,dx,dy):
     for i in snake:
@@ -100,18 +100,19 @@ def snake_growth(d_x, x, y):
 def add_apple():
     apple_x = random.randint(0,40)
     apple_y = random.randint(0,40)
-    apple_all.append(Apple_element(apple_x, apple_y))
+    apple_all.append(Apple_element(apple_x * 21, apple_y * 21))
 
 def show_apple():
    
     for apple in apple_all:
-        screen.blit(snake_Font.render('X', False, blue),(apple.x * 21, apple.y * 21))
+        screen.blit(snake_Font.render('X', False, blue),(apple.x, apple.y))
 
 def detect_colision():
-    
+    global score
     for apple in apple_all:
-        if apple.x in range(int(snake_all[0].x), int(snake_all[0].x + 21)):
+        if apple.x  in range(int(snake_all[0].x), int(snake_all[0].x + 21)) and apple.y  in range(int(snake_all[0].y), int(snake_all[0].y + 21)):
             print("collision")
+            score +=1
 
 while True:
   
@@ -141,13 +142,14 @@ while True:
        
                  
     screen.fill((141,141,141))
-    banner()
+    banner(score)
     
     dx +=x
     dy +=y
     show_snake(snake_all,x,y)
     if dx+dy % 5 == 0 and dx+dy != 0:
         add_apple()
+        
     #print(dx)
     show_apple()
     detect_colision()
