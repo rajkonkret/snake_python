@@ -110,7 +110,7 @@ def show_apple():
 def detect_colision():
     global score
     for apple in apple_all:
-        if apple.x  in range(int(snake_all[0].x), int(snake_all[0].x + 21)) and apple.y  in range(int(snake_all[0].y), int(snake_all[0].y + 21)):
+        if (snake_all[0].x in range(int(apple.x), int(apple.x + 21))) and (snake_all[0].y in range(int(apple.y), int(apple.y + 21))):
             print("collision")
             score +=1
 
