@@ -151,8 +151,9 @@ while True:
         add_apple()
         
     #print(dx)
-    show_apple()
     detect_colision()
+    show_apple()
+    
     snake_growth(dx,x,y)
    
     time.sleep(1/8)
