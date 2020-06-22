@@ -9,7 +9,7 @@ blue = (0,0,255)
 black = (0,0,0)
 map_size = 900
 x,y = 0,0
-dx, dy =0,0
+dx, dy = 0,0
 score = 0
 pygame.init()
 screen = pygame.display.set_mode((map_size, map_size*3//4))
@@ -110,7 +110,7 @@ def show_apple():
 def detect_colision():
     global score
     for apple in apple_all:
-        if (snake_all[0].x in range(int(apple.x), int(apple.x + 21))) and (snake_all[0].y in range(int(apple.y), int(apple.y + 21))):
+        if (snake_all[0].x in range(int(apple.x), int(apple.x + 22))) and (snake_all[0].y in range(int(apple.y), int(apple.y + 22))):
             print("collision")
             score +=1
 
