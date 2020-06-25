@@ -120,6 +120,7 @@ def detect_colision():
             print(apple.id)
             apple_all.remove(apple)
             score +=1
+            add_apple()
 
 while True:
   
