@@ -34,7 +34,8 @@ class Snake_element:
         self.y = y
 
 class Apple_element:
-    def __init__(self,x,y):
+    def __init__(self,id,x,y):
+        self.id = id
         self.x = x
         self.y = y
 
@@ -42,7 +43,10 @@ for i in range(1,2):
     snake_el = Snake_element(i,400,350+i*snake_font_size*0.7)
     snake_all.append(snake_el)
 
-
+for o in range(1,11):
+    apple2_x = random.randint(0,40)
+    apple2_y = random.randint(0,40)
+    apple_all.append(Apple_element( o, apple2_x * 21, apple2_y * 21))
 
 
 
@@ -98,9 +102,10 @@ def snake_growth(d_x, x, y):
         print("len snake: ", len(snake_all))
         
 def add_apple():
+    last_apple_id = apple_all[-1].id
     apple_x = random.randint(0,40)
     apple_y = random.randint(0,40)
-    apple_all.append(Apple_element(apple_x * 21, apple_y * 21))
+    apple_all.append(Apple_element(last_apple_id+1, apple_x * 21, apple_y * 21))
 
 def show_apple():
    
@@ -110,8 +115,10 @@ def show_apple():
 def detect_colision():
     global score
     for apple in apple_all:
-        if ((snake_all[0].x in range(int(apple.x), int(apple.x + 22))) and (snake_all[0].y in range(int(apple.y), int(apple.y + 22)))) or (((snake_all[0].x + 21) in range(int(apple.x), int(apple.x + 22))) and ((snake_all[0].y + 21) in range(int(apple.y), int(apple.y + 22)))) :
+        if ((snake_all[0].x in range(int(apple.x), int(apple.x + 22))) and (snake_all[0].y in range(int(apple.y), int(apple.y + 21)))) or (((snake_all[0].x + 21) in range(int(apple.x), int(apple.x + 22))) and ((snake_all[0].y + 21) in range(int(apple.y), int(apple.y + 21)))) :
             print("collision")
+            print(apple.id)
+            apple_all.remove(apple)
             score +=1
 
 while True:
@@ -147,7 +154,7 @@ while True:
     dx +=x
     dy +=y
     show_snake(snake_all,x,y)
-    if dx+dy % 5 == 0 and dx+dy != 0:
+    if dx+dy % 2 == 0 and dx+dy != 0:
         add_apple()
         
     #print(dx)
