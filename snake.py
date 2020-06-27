@@ -45,7 +45,7 @@ for i in range(1,2):
 
 for o in range(1,11):
     apple2_x = random.randint(0,40)
-    apple2_y = random.randint(0,40)
+    apple2_y = random.randint(4,40)
     apple_all.append(Apple_element( o, apple2_x * 21, apple2_y * 21))
 
 
@@ -96,7 +96,7 @@ def snake_growth(d_x, x, y):
     else:
         y_sign = -1
 
-    if d_x != 0 and d_x % 4 == 0 :
+    if d_x != 0:
         snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7 * x_sign ,snake_all[-1].y + snake_font_size*0.7 * y_sign))
         print(d_x)
         print("len snake: ", len(snake_all))
@@ -104,7 +104,7 @@ def snake_growth(d_x, x, y):
 def add_apple():
     last_apple_id = apple_all[-1].id
     apple_x = random.randint(0,40)
-    apple_y = random.randint(0,40)
+    apple_y = random.randint(4,40)
     apple_all.append(Apple_element(last_apple_id+1, apple_x * 21, apple_y * 21))
 
 def show_apple():
@@ -112,7 +112,7 @@ def show_apple():
     for apple in apple_all:
         screen.blit(snake_Font.render('X', False, blue),(apple.x, apple.y))
 
-def detect_colision():
+def detect_colision(x,y):
     global score
     for apple in apple_all:
         if ((snake_all[0].x in range(int(apple.x), int(apple.x + 22))) and (snake_all[0].y in range(int(apple.y), int(apple.y + 21)))) or (((snake_all[0].x + 21) in range(int(apple.x), int(apple.x + 22))) and ((snake_all[0].y + 21) in range(int(apple.y), int(apple.y + 21)))) :
@@ -121,6 +121,7 @@ def detect_colision():
             apple_all.remove(apple)
             score +=1
             add_apple()
+            snake_growth(1,x,y)
 
 while True:
   
@@ -155,14 +156,15 @@ while True:
     dx +=x
     dy +=y
     show_snake(snake_all,x,y)
-    if dx+dy % 2 == 0 and dx+dy != 0:
+    if dx+dy % 19 == 0 and dx+dy != 0:
         add_apple()
         
     #print(dx)
-    detect_colision()
+    detect_colision(x,y)
     show_apple()
     
-    snake_growth(dx,x,y)
+    if dx !=0 and dx % 7 == 0:
+        snake_growth(dx,x,y)
    
     time.sleep(1/8)
     pygame.display.update()
