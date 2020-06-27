@@ -11,6 +11,7 @@ map_size = 900
 x,y = 0,0
 dx, dy = 0,0
 score = 0
+iter=2
 pygame.init()
 screen = pygame.display.set_mode((map_size, map_size*3//4))
 pygame.display.set_caption("Snake")
@@ -86,6 +87,7 @@ def show_snake(snake,dx,dy):
 show_snake(snake_all,0,0)
 
 def snake_growth(d_x, x, y):
+    global iter
     if len(snake_all) > 1 and (snake_all[-1].x - snake_all[-2].x) != 0:
         x_sign = (snake_all[-1].x - snake_all[-2].x)/abs(snake_all[-1].x - snake_all[-2].x)
     else:
@@ -97,7 +99,8 @@ def snake_growth(d_x, x, y):
         y_sign = -1
 
     if d_x != 0:
-        snake_all.append(Snake_element(i,snake_all[-1].x + snake_font_size * 0.7 * x_sign ,snake_all[-1].y + snake_font_size*0.7 * y_sign))
+        snake_all.append(Snake_element(iter,snake_all[-1].x + snake_font_size * 0.7 * x_sign ,snake_all[-1].y + snake_font_size*0.7 * y_sign))
+        iter+=1
         print(d_x)
         print("len snake: ", len(snake_all))
         
@@ -122,6 +125,17 @@ def detect_colision(x,y):
             score +=1
             add_apple()
             snake_growth(1,x,y)
+
+def end_game():
+     pygame.quit()
+     sys.exit()
+
+def detect_himself_colision():
+    for el in snake_all:
+        if el.number !=1:
+            if snake_all[0].x == el.x and snake_all[0].y == el.y:
+                print("koniec gry")
+                end_game()
 
 while True:
   
@@ -156,6 +170,7 @@ while True:
     dx +=x
     dy +=y
     show_snake(snake_all,x,y)
+    
     if dx+dy % 19 == 0 and dx+dy != 0:
         add_apple()
         
@@ -165,6 +180,6 @@ while True:
     
     if dx !=0 and dx % 7 == 0:
         snake_growth(dx,x,y)
-   
+    detect_himself_colision()
     time.sleep(1/8)
     pygame.display.update()
