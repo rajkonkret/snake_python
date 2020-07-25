@@ -144,20 +144,22 @@ while True:
             
             print("break")
             end_game()
+        print("action: ", action.type)
         if action.type is pygame.KEYDOWN:
-            if action.key is pygame.K_o:
+            print(action.key)
+            if action.key == pygame.K_LEFT:
                 x=-1
                 y=0
                # print(x)
-            if action.key is pygame.K_p:
+            if action.key == pygame.K_RIGHT:
                 x=+1
                 y=0
                # print(x)
-            if action.key is pygame.K_q:
+            if action.key == pygame.K_UP:
                 y=-1
                 x=0
                # print(y)
-            if action.key is pygame.K_a:
+            if action.key == pygame.K_DOWN:
                 y=+1
                 x=0
               #  print(y)
